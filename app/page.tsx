@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { client } from "../lib/sanity";
 
 type Article = {
@@ -152,9 +153,18 @@ export default async function Home() {
                     {piece.excerpt || "No excerpt yet."}
                   </p>
 
-                  <button className="mt-5 text-sm text-amber-900/80 underline underline-offset-4">
+                                  {piece.slug?.current ? (
+                  <Link
+                    href={`/articles/${piece.slug.current}`}
+                    className="mt-5 inline-block text-sm text-amber-900/80 underline underline-offset-4"
+                  >
                     Read piece
-                  </button>
+                  </Link>
+                ) : (
+                  <span className="mt-5 inline-block text-sm text-stone-500">
+                    No link yet
+                  </span>
+                )}
                 </article>
               ))
             ) : (
