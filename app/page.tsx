@@ -2,6 +2,7 @@ import Link from "next/link";
 import { client } from "../lib/sanity";
 
 export const revalidate = 0;
+export const dynamic = "force-dynamic";
 
 type Article = {
   _id: string;
@@ -14,15 +15,17 @@ type Article = {
 };
 
 export default async function Home() {
-  const featured: Article[] = await client.fetch(`
-  *[_type == "article"] | order(_createdAt desc)[0...3] {
-    _id,
-    title,
-    excerpt,
-    _createdAt,
-    slug
-  }
-`);
+  const featured: Article[] = await client.fetch(
+    `
+    *[_type == "article"] | order(_createdAt desc)[0...3] {
+      _id,
+      title,
+      excerpt,
+      _createdAt,
+      slug
+    }
+    `
+  );
 
   const archive = [
     "History",
@@ -139,14 +142,15 @@ export default async function Home() {
                   <div className="flex items-center justify-between text-xs uppercase tracking-[0.14em] text-amber-900/60">
                     <span>Article</span>
                     <span>
-  {piece._createdAt
-    ? new Date(piece._createdAt).toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      })
-    : "Draft"}
-</span>
+                      {piece._createdAt
+                        ? new Date(piece._createdAt).toLocaleDateString("en-US", {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                            timeZone: "UTC",
+                          })
+                        : "Draft"}
+                    </span>
                   </div>
 
                   <h4 className="mt-4 text-2xl font-semibold text-stone-900">
@@ -159,18 +163,18 @@ export default async function Home() {
                     {piece.excerpt || "No excerpt yet."}
                   </p>
 
-                                  {piece.slug?.current ? (
-                  <Link
-                    href={`/articles/${piece.slug.current}`}
-                    className="mt-5 inline-block text-sm text-amber-900/80 underline underline-offset-4"
-                  >
-                    Read piece
-                  </Link>
-                ) : (
-                  <span className="mt-5 inline-block text-sm text-stone-500">
-                    No link yet
-                  </span>
-                )}
+                  {piece.slug?.current ? (
+                    <Link
+                      href={`/articles/${piece.slug.current}`}
+                      className="mt-5 inline-block text-sm text-amber-900/80 underline underline-offset-4"
+                    >
+                      Read piece
+                    </Link>
+                  ) : (
+                    <span className="mt-5 inline-block text-sm text-stone-500">
+                      No link yet
+                    </span>
+                  )}
                 </article>
               ))
             ) : (
