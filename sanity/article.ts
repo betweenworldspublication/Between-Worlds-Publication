@@ -19,6 +19,11 @@ export default defineType({
       },
     }),
     defineField({
+  name: "publishedAt",
+  title: "Published at",
+  type: "datetime",
+}),
+    defineField({
       name: "excerpt",
       title: "Excerpt",
       type: "text",
