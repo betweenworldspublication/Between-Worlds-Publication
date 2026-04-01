@@ -1,13 +1,25 @@
-export default function Home() {
-  const featured = [
-    {
-      title: "The Oldest Noodle",
-      category: "Creative Nonfiction",
-      date: "31 March 2026",
-      excerpt:
-        "A short piece that sets the beginning context for the history of noodles in China.",
-    },
-  ];
+import { client } from "../lib/sanity";
+
+type Article = {
+  _id: string;
+  title: string;
+  excerpt?: string;
+  publishedAt?: string;
+  slug?: {
+    current: string;
+  };
+};
+
+export default async function Home() {
+  const featured: Article[] = await client.fetch(`
+    *[_type == "article"] | order(publishedAt desc)[0...3] {
+      _id,
+      title,
+      excerpt,
+      publishedAt,
+      slug
+    }
+  `);
 
   const archive = [
     "History",
@@ -77,7 +89,7 @@ export default function Home() {
                 href="#about"
                 className="bg-amber-50/70 px-5 py-3 text-sm font-medium text-stone-900 transition hover:bg-amber-50"
               >
-                About the author
+                About the publication
               </a>
             </div>
           </div>
@@ -115,31 +127,44 @@ export default function Home() {
           </div>
 
           <div className="grid gap-10 md:grid-cols-3">
-            {featured.map((piece) => (
-              <article
-                key={piece.title}
-                className="bg-amber-50/35 p-6 shadow-sm transition hover:-translate-y-1"
-              >
-                <div className="flex items-center justify-between text-xs uppercase tracking-[0.14em] text-amber-900/60">
-                  <span>{piece.category}</span>
-                  <span>{piece.date}</span>
-                </div>
+            {featured.length > 0 ? (
+              featured.map((piece) => (
+                <article
+                  key={piece._id}
+                  className="bg-amber-50/35 p-6 shadow-sm transition hover:-translate-y-1"
+                >
+                  <div className="flex items-center justify-between text-xs uppercase tracking-[0.14em] text-amber-900/60">
+                    <span>Article</span>
+                    <span>
+                      {piece.publishedAt
+                        ? new Date(piece.publishedAt).toLocaleDateString()
+                        : "Draft"}
+                    </span>
+                  </div>
 
-                <h4 className="mt-4 text-2xl font-semibold text-stone-900">
-                  {piece.title}
-                </h4>
+                  <h4 className="mt-4 text-2xl font-semibold text-stone-900">
+                    {piece.title}
+                  </h4>
 
-                <div className="mt-3 h-px w-12 bg-amber-900/20" />
+                  <div className="mt-3 h-px w-12 bg-amber-900/20" />
 
-                <p className="mt-4 text-base leading-8 text-stone-800">
-                  {piece.excerpt}
+                  <p className="mt-4 text-base leading-8 text-stone-800">
+                    {piece.excerpt || "No excerpt yet."}
+                  </p>
+
+                  <button className="mt-5 text-sm text-amber-900/80 underline underline-offset-4">
+                    Read piece
+                  </button>
+                </article>
+              ))
+            ) : (
+              <div className="bg-amber-50/35 p-6 shadow-sm md:col-span-3">
+                <p className="text-base leading-8 text-stone-800">
+                  No articles published yet. Create one in Sanity Studio to see
+                  it here.
                 </p>
-
-                <button className="mt-5 text-sm text-amber-900/80 underline underline-offset-4">
-                  Read piece
-                </button>
-              </article>
-            ))}
+              </div>
+            )}
           </div>
         </section>
 
@@ -186,9 +211,9 @@ export default function Home() {
 
             <div className="space-y-5 text-base leading-8 text-stone-800">
               <p>
-                Between Worlds is an independent publication created by Chinese
-                immigrant Yuxun (Justin) Wang as a way to spread awareness to
-                the stories of different cultures that may never get told.
+                Between Worlds is an independent publication created to spread
+                awareness to the stories of different cultures that may never
+                get told.
               </p>
               <p className="italic text-stone-700">
                 Throughout history, stories, whether oral and written, poetry
@@ -224,10 +249,10 @@ export default function Home() {
                 Email me
               </a>
               <a
-                href="#"
+                href="#featured"
                 className="bg-white/10 px-5 py-3 text-sm font-medium text-amber-50 transition hover:bg-white/15"
               >
-                View all writing
+                View featured writing
               </a>
             </div>
           </div>
