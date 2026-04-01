@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { client } from "../lib/sanity";
 
+export const revalidate = 0;
+
 type Article = {
   _id: string;
   title: string;
