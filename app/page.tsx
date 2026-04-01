@@ -7,7 +7,7 @@ type Article = {
   _id: string;
   title: string;
   excerpt?: string;
-  publishedAt?: string;
+  _createdAt?: string;
   slug?: {
     current: string;
   };
@@ -15,14 +15,14 @@ type Article = {
 
 export default async function Home() {
   const featured: Article[] = await client.fetch(`
-    *[_type == "article"] | order(publishedAt desc)[0...3] {
-      _id,
-      title,
-      excerpt,
-      publishedAt,
-      slug
-    }
-  `);
+  *[_type == "article"] | order(_createdAt desc)[0...3] {
+    _id,
+    title,
+    excerpt,
+    _createdAt,
+    slug
+  }
+`);
 
   const archive = [
     "History",
@@ -139,8 +139,8 @@ export default async function Home() {
                   <div className="flex items-center justify-between text-xs uppercase tracking-[0.14em] text-amber-900/60">
                     <span>Article</span>
                     <span>
-  {piece.publishedAt
-    ? new Date(piece.publishedAt).toLocaleDateString("en-US", {
+  {piece._createdAt
+    ? new Date(piece._createdAt).toLocaleDateString("en-US", {
         year: "numeric",
         month: "long",
         day: "numeric",
