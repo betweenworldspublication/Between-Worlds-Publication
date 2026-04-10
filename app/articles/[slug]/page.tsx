@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { client } from "../../../lib/sanity";
 import { PortableText } from "@portabletext/react";
 
@@ -31,6 +32,13 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     return (
       <main className="min-h-screen bg-amber-100 px-6 py-20 font-serif text-stone-900">
         <div className="mx-auto max-w-3xl">
+          <Link
+            href="/"
+            className="mb-8 inline-block text-sm text-stone-700 transition hover:text-amber-900"
+          >
+            ← Back to Home
+          </Link>
+
           <h1 className="text-4xl font-semibold">Article not found</h1>
           <p className="mt-4 text-base leading-8 text-stone-800">
             This piece may not be published yet, or its link may be incorrect.
@@ -43,6 +51,13 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   return (
     <main className="min-h-screen bg-amber-100 px-6 py-20 font-serif text-stone-900">
       <article className="mx-auto max-w-3xl">
+        <Link
+          href="/"
+          className="mb-8 inline-block text-sm text-stone-700 transition hover:text-amber-900"
+        >
+          ← Back to Home
+        </Link>
+
         <p className="text-xs uppercase tracking-[0.22em] text-amber-900/60">
           Article
         </p>

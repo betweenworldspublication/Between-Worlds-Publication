@@ -271,7 +271,7 @@ export default async function Home() {
                 href="mailto:hello@example.com"
                 className="bg-amber-100 px-5 py-3 text-sm font-medium text-stone-900 transition hover:bg-white"
               >
-                Email me
+                Email
               </a>
               <a
                 href="#featured"
