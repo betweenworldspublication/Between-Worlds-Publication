@@ -193,6 +193,10 @@ export default async function Home() {
           </div>
         </section>
 
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="h-px bg-amber-900/10" />
+        </div>
+
         <section id="archive" className="mx-auto max-w-6xl px-6 py-20">
           <div className="grid gap-12 md:grid-cols-[.8fr_1.2fr]">
             <div>
@@ -221,6 +225,10 @@ export default async function Home() {
             </div>
           </div>
         </section>
+
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="h-px bg-amber-900/10" />
+        </div>
 
         <section id="about" className="mx-auto max-w-6xl px-6 py-20">
           <div className="grid gap-12 md:grid-cols-2">
@@ -251,6 +259,10 @@ export default async function Home() {
             </div>
           </div>
         </section>
+
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="h-px bg-amber-900/10" />
+        </div>
 
         <section id="contact" className="mx-auto max-w-6xl px-6 py-20">
           <div className="bg-stone-900 px-8 py-10 text-amber-50 shadow-sm md:px-10">
