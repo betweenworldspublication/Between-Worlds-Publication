@@ -53,9 +53,9 @@ export default async function Home() {
             <a href="#featured" className="transition hover:text-amber-900">
               Featured
             </a>
-            <a href="#archive" className="transition hover:text-amber-900">
-              Archive
-            </a>
+            <Link href="/articles" className="transition hover:text-amber-900">
+              Articles
+            </Link>
             <a href="#about" className="transition hover:text-amber-900">
               About
             </a>
@@ -127,9 +127,12 @@ export default async function Home() {
                 Recent Writing
               </h3>
             </div>
-            <p className="hidden text-sm text-stone-600 md:block">
-              Recent publications
-            </p>
+            <Link
+              href="/articles"
+              className="bg-amber-50/70 px-5 py-3 text-sm font-medium text-stone-900 transition hover:bg-amber-50"
+            >
+              All Articles
+            </Link>
           </div>
 
           <div className="grid gap-10 md:grid-cols-3">
