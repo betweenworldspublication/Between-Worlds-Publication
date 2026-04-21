@@ -87,13 +87,13 @@ export default async function Home() {
             <div className="mt-10 flex flex-wrap gap-4">
               <a
                 href="#featured"
-                className="bg-stone-900 px-5 py-3 text-sm font-medium text-amber-50 transition hover:bg-amber-900"
+                className="bg-stone-900 px-5 py-3 text-sm font-serif text-amber-50 transition hover:bg-amber-900"
               >
                 Read featured work
               </a>
               <Link
                 href="/submit"
-                className="bg-amber-50/70 px-5 py-3 text-sm font-medium text-stone-900 transition hover:bg-amber-50"
+                className="bg-amber-50/70 px-5 py-3 text-sm font-serif text-stone-900 transition hover:bg-amber-50"
                 >
                 Submit Story
               </Link>
@@ -129,7 +129,7 @@ export default async function Home() {
             </div>
             <Link
               href="/articles"
-              className="bg-amber-50/70 px-5 py-3 text-sm font-medium text-stone-900 transition hover:bg-amber-50"
+              className="bg-amber-50/70 px-5 py-3 text-sm font-serif text-stone-900 transition hover:bg-amber-50"
             >
               All Articles
             </Link>
@@ -220,7 +220,7 @@ export default async function Home() {
               {archive.map((item) => (
                 <div
                   key={item}
-                  className="bg-amber-50/30 px-5 py-4 text-base font-medium text-stone-900 shadow-sm"
+                  className="bg-amber-50/30 px-5 py-4 text-base font-serif text-stone-900 shadow-sm"
                 >
                   {item}
                 </div>
@@ -284,13 +284,13 @@ export default async function Home() {
             <div className="mt-8 flex flex-wrap gap-4">
               <a
                 href="mailto:hello@example.com"
-                className="bg-amber-100 px-5 py-3 text-sm font-medium text-stone-900 transition hover:bg-white"
+                className="bg-amber-100 px-5 py-3 text-sm font-serif text-stone-900 transition hover:bg-white"
               >
                 Email
               </a>
               <a
                 href="#featured"
-                className="bg-white/10 px-5 py-3 text-sm font-medium text-amber-50 transition hover:bg-white/15"
+                className="bg-white/10 px-5 py-3 text-sm font-serif text-amber-50 transition hover:bg-white/15"
               >
                 View featured writing
               </a>
