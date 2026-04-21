@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useMemo, useState } from "react";
+import Link from "next/link";
 
 const storyTypes = [
   "History",
@@ -176,7 +177,18 @@ export default function SubmitPage() {
           </div>
 
           {error ? <p className="text-sm text-red-700">{error}</p> : null}
-          {success ? <p className="text-sm text-green-700">{success}</p> : null}
+          {success ? (
+            <div className="space-y-4">
+                <p className="text-sm text-green-700">{success}</p>
+
+                <Link
+                href="/"
+                className="inline-block bg-amber-50 px-5 py-3 text-sm font-medium text-stone-900 transition hover:bg-amber-100 ring-1 ring-stone-200"
+                >
+                ← Back to Home
+                </Link>
+            </div>
+            ) : null}
 
           <div className="flex flex-wrap gap-4">
             <button
