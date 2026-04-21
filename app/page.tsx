@@ -91,12 +91,12 @@ export default async function Home() {
               >
                 Read featured work
               </a>
-              <a
-                href="#about"
+              <Link
+                href="/submit"
                 className="bg-amber-50/70 px-5 py-3 text-sm font-medium text-stone-900 transition hover:bg-amber-50"
-              >
-                About the publication
-              </a>
+                >
+                Submit Story
+              </Link>
             </div>
           </div>
 
