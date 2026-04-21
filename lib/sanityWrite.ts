@@ -1,8 +1,8 @@
 import { createClient } from "@sanity/client";
 
 export const sanityWriteClient = createClient({
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET!,
+    projectId: "ftoag85l",
+    dataset: "production",
   apiVersion: "2025-01-01",
   token: process.env.SANITY_API_WRITE_TOKEN,
   useCdn: false,
