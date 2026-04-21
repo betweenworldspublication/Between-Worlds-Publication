@@ -92,7 +92,7 @@ export default function SubmitPage() {
     "w-full rounded-2xl border border-stone-200/80 bg-stone-50/80 px-4 py-3.5 text-[15px] text-stone-900 placeholder:text-stone-400 outline-none transition focus:border-amber-700/40 focus:bg-amber-50/70 focus:ring-4 focus:ring-amber-100";
 
   return (
-    <main className="min-h-screen bg-[linear-gradient(to_bottom,_#f6ecd6,_#f3e6cd)] px-6 py-10 text-stone-900">
+    <main className="min-h-screen bg-amber-100">
       <div className="mx-auto max-w-5xl">
         <Link
           href="/"
@@ -133,7 +133,7 @@ export default function SubmitPage() {
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         className={inputClass}
-                        placeholder="What should we call you?"
+                        placeholder="Name or Pseudonym"
                         required
                       />
                     </div>
@@ -233,10 +233,7 @@ export default function SubmitPage() {
                       required
                     />
 
-                    <p className="mt-3 text-sm leading-7 text-stone-600">
-                      Minimum 200 words. Take your time — we want the page to feel
-                      open, thoughtful, and easy to write in.
-                    </p>
+                    
                   </div>
 
                   {error ? (
