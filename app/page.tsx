@@ -282,12 +282,12 @@ export default async function Home() {
             </p>
 
             <div className="mt-8 flex flex-wrap gap-4">
-              <a
-                href="mailto:hello@example.com"
-                className="bg-amber-100 px-5 py-3 text-sm font-serif text-stone-900 transition hover:bg-white"
+              <Link
+                href="/contact"
+                className="bg-amber-100 px-5 py-3 text-sm font-medium text-stone-900 transition hover:bg-white"
               >
                 Email
-              </a>
+              </Link>
               <a
                 href="#featured"
                 className="bg-white/10 px-5 py-3 text-sm font-serif text-amber-50 transition hover:bg-white/15"

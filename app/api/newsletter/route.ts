@@ -18,10 +18,4 @@ export const subscriber = defineType({
       initialValue: () => new Date().toISOString(),
     }),
   ],
-  preview: {
-    select: {
-      title: "email",
-      subtitle: "subscribedAt",
-    },
-  },
 });
