@@ -91,6 +91,14 @@ export default function SubmitPage() {
   return (
     <main className="min-h-screen bg-amber-100 px-6 py-16 font-serif text-stone-900">
       <div className="mx-auto max-w-3xl bg-amber-50/40 p-8 shadow-sm">
+      
+        <Link
+        href="/"
+        className="inline-block mb-6 text-sm text-stone-700 hover:text-amber-900 transition"
+        >
+        ← Back to Home
+        </Link>
+
         <p className="text-xs uppercase tracking-[0.22em] text-amber-900/60">
           Submit
         </p>
