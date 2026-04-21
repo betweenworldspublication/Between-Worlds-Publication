@@ -282,8 +282,8 @@ export default function SubmitPage() {
                     Thoughtful, vivid, and personal
                   </h2>
                   <p className="mt-4 text-sm leading-7 text-stone-700">
-                    We are interested in writing that bridges worlds — history,
-                    culture, memory, language, reflection, and lived experience.
+                    We are interested in writing that bridges cultures — history,
+                    memory, language, reflection, and lived experience.
                   </p>
                 </div>
 
@@ -292,7 +292,7 @@ export default function SubmitPage() {
                     A good submission does not need to feel overly formal.
                   </p>
                   <p className="mt-2 text-sm leading-7 text-stone-700">
-                    It should feel alive, clear, and intentional.
+                    It should feel alive and intentional.
                   </p>
                 </div>
 
@@ -304,7 +304,7 @@ export default function SubmitPage() {
                   <ul className="mt-4 space-y-3 text-sm leading-7 text-stone-700">
                     <li>• Include a title that matches the spirit of the piece.</li>
                     <li>• Choose at least one story type.</li>
-                    <li>• Make sure the submission is at least 200 words.</li>
+                    <li>• Make sure your story is meaningful to you.</li>
                     <li>• Double-check your email so we can reply.</li>
                   </ul>
                 </div>
