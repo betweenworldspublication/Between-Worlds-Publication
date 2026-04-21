@@ -88,126 +88,233 @@ export default function SubmitPage() {
     }
   }
 
-  return (
-    <main className="min-h-screen bg-amber-100 px-6 py-16 font-serif text-stone-900">
-      <div className="mx-auto max-w-3xl bg-amber-50/40 p-8 shadow-sm">
+  const inputClass =
+    "w-full rounded-2xl border border-stone-200/80 bg-stone-50/80 px-4 py-3.5 text-[15px] text-stone-900 placeholder:text-stone-400 outline-none transition focus:border-amber-700/40 focus:bg-amber-50/70 focus:ring-4 focus:ring-amber-100";
 
-       <Link
-        href="/"
-        className="inline-block mb-6 px-4 py-2 text-sm bg-amber-50 ring-1 ring-stone-200 text-stone-900 hover:bg-amber-100 transition"
+  return (
+    <main className="min-h-screen bg-[linear-gradient(to_bottom,_#f6ecd6,_#f3e6cd)] px-6 py-10 text-stone-900">
+      <div className="mx-auto max-w-5xl">
+        <Link
+          href="/"
+          className="mb-6 inline-flex items-center gap-2 rounded-full border border-stone-300/70 bg-amber-50/70 px-4 py-2 text-sm font-medium text-stone-700 backdrop-blur-sm transition hover:-translate-y-0.5 hover:bg-amber-50"
         >
-        ← Back
+          <span aria-hidden="true">←</span>
+          Back to Home
         </Link>
 
-        <p className="text-xs uppercase tracking-[0.22em] text-amber-900/60">
-          Submit
-        </p>
-        <h1 className="mt-3 text-4xl font-semibold">Submit Your Story</h1>
-        <div className="mt-4 h-px w-16 bg-amber-900/20" />
-        <p className="mt-6 text-base leading-8 text-stone-800">
-          Send your writing for review. Submissions must be at least 200 words.
-        </p>
+        <div className="overflow-hidden rounded-[2rem] border border-stone-200/70 bg-[#fbf6ec]/95 shadow-[0_20px_60px_rgba(0,0,0,0.08)]">
+          <div className="grid gap-0 lg:grid-cols-[1.1fr_0.9fr]">
+            <section className="relative px-7 py-10 sm:px-10 sm:py-12">
+              <div className="absolute left-0 top-0 h-full w-[10px] bg-gradient-to-b from-amber-200/70 via-transparent to-rose-200/60" />
 
-        <form onSubmit={handleSubmit} className="mt-10 space-y-6">
-          <div>
-            <label className="mb-2 block text-sm font-medium">Name</label>
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="w-full bg-white px-4 py-3 text-sm text-stone-900 outline-none ring-1 ring-stone-200 focus:ring-stone-400"
-              required
-            />
+              <div className="max-w-2xl">
+                <div className="inline-block rounded-full bg-amber-200/60 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-amber-950/70">
+                  Submit
+                </div>
+
+                <h1 className="mt-5 text-4xl font-semibold tracking-tight text-stone-900 sm:text-5xl">
+                  Submit Your Story
+                </h1>
+
+                <p className="mt-5 max-w-xl text-[16px] leading-8 text-stone-700">
+                  Send your writing for editorial review. We are looking for work
+                  that feels thoughtful, vivid, and human. Submissions must be at
+                  least 200 words.
+                </p>
+
+                <form onSubmit={handleSubmit} className="mt-10 space-y-8">
+                  <div className="grid gap-5 sm:grid-cols-2">
+                    <div>
+                      <label className="mb-2.5 block text-sm font-medium text-stone-800">
+                        Your Name
+                      </label>
+                      <input
+                        type="text"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        className={inputClass}
+                        placeholder="What should we call you?"
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <label className="mb-2.5 block text-sm font-medium text-stone-800">
+                        Your Email
+                      </label>
+                      <input
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className={inputClass}
+                        placeholder="Where can we reach you?"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="mb-2.5 block text-sm font-medium text-stone-800">
+                      Story Title
+                    </label>
+                    <input
+                      type="text"
+                      value={title}
+                      onChange={(e) => setTitle(e.target.value)}
+                      className={inputClass}
+                      placeholder="Give your piece a title"
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <div className="mb-3 flex items-center justify-between gap-4">
+                      <label className="block text-sm font-medium text-stone-800">
+                        Story Type
+                      </label>
+                      <span className="text-xs text-stone-500">
+                        Choose one or more
+                      </span>
+                    </div>
+
+                    <div className="flex flex-wrap gap-3">
+                      {storyTypes.map((tag, index) => {
+                        const selected = storyType.includes(tag);
+
+                        const chipColors = [
+                          "bg-amber-100/80",
+                          "bg-rose-100/80",
+                          "bg-orange-100/80",
+                          "bg-lime-100/80",
+                          "bg-sky-100/80",
+                          "bg-violet-100/80",
+                          "bg-teal-100/80",
+                          "bg-yellow-100/80",
+                        ];
+
+                        return (
+                          <button
+                            key={tag}
+                            type="button"
+                            onClick={() => toggleTag(tag)}
+                            className={`rounded-full border px-4 py-2.5 text-sm transition ${
+                              selected
+                                ? "border-stone-900 bg-stone-900 text-amber-50 shadow-sm"
+                                : `border-stone-200 text-stone-800 hover:-translate-y-0.5 hover:border-stone-300 ${chipColors[index % chipColors.length]}`
+                            }`}
+                          >
+                            {tag}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="mb-2.5 flex items-center justify-between gap-4">
+                      <label className="block text-sm font-medium text-stone-800">
+                        Your Story
+                      </label>
+                      <span
+                        className={`text-xs ${
+                          wordCount >= 200 ? "text-green-700" : "text-stone-500"
+                        }`}
+                      >
+                        {wordCount} / 200 words
+                      </span>
+                    </div>
+
+                    <textarea
+                      value={story}
+                      onChange={(e) => setStory(e.target.value)}
+                      rows={14}
+                      className="w-full rounded-[1.5rem] border border-stone-200/80 bg-gradient-to-b from-[#f8f1e4] to-[#f5ecdc] px-5 py-4 text-[15px] leading-8 text-stone-900 placeholder:text-stone-400 outline-none transition focus:border-amber-700/40 focus:ring-4 focus:ring-amber-100"
+                      placeholder="Write or paste your story here..."
+                      required
+                    />
+
+                    <p className="mt-3 text-sm leading-7 text-stone-600">
+                      Minimum 200 words. Take your time — we want the page to feel
+                      open, thoughtful, and easy to write in.
+                    </p>
+                  </div>
+
+                  {error ? (
+                    <div className="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                      {error}
+                    </div>
+                  ) : null}
+
+                  {success ? (
+                    <div className="rounded-2xl border border-green-200 bg-green-50 px-4 py-4 text-sm text-green-800">
+                      <p>{success}</p>
+                      <Link
+                        href="/"
+                        className="mt-3 inline-flex items-center gap-2 font-medium text-stone-800 underline underline-offset-4"
+                      >
+                        <span aria-hidden="true">←</span>
+                        Back to Home
+                      </Link>
+                    </div>
+                  ) : null}
+
+                  <div className="flex flex-wrap items-center gap-4">
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="rounded-full bg-stone-900 px-6 py-3.5 text-sm font-medium text-amber-50 transition hover:-translate-y-0.5 hover:bg-amber-900 disabled:cursor-not-allowed disabled:opacity-60"
+                    >
+                      {isSubmitting ? "Sending..." : "Send Story"}
+                    </button>
+
+                    <p className="text-sm text-stone-500">
+                      Your submission will be reviewed before anything is published.
+                    </p>
+                  </div>
+                </form>
+              </div>
+            </section>
+
+            <aside className="border-t border-stone-200/70 bg-[linear-gradient(to_bottom,_rgba(255,248,235,0.9),_rgba(248,235,214,0.95))] px-7 py-10 sm:px-10 lg:border-l lg:border-t-0">
+              <div className="space-y-6">
+                <div className="rounded-[1.75rem] bg-[#f7e7cf] p-6 shadow-sm">
+                  <p className="text-xs uppercase tracking-[0.2em] text-amber-950/50">
+                    Editorial Note
+                  </p>
+                  <h2 className="mt-3 text-2xl font-semibold tracking-tight text-stone-900">
+                    Thoughtful, vivid, and personal
+                  </h2>
+                  <p className="mt-4 text-sm leading-7 text-stone-700">
+                    We are interested in writing that bridges worlds — history,
+                    culture, memory, language, reflection, and lived experience.
+                  </p>
+                </div>
+
+                <div className="rotate-[-1.5deg] rounded-[1.5rem] border border-amber-200/70 bg-amber-100/80 p-5 shadow-sm">
+                  <p className="text-sm font-medium text-stone-800">
+                    A good submission does not need to feel overly formal.
+                  </p>
+                  <p className="mt-2 text-sm leading-7 text-stone-700">
+                    It should feel alive, clear, and intentional.
+                  </p>
+                </div>
+
+                <div className="rounded-[1.75rem] border border-stone-200/70 bg-stone-50/75 p-6">
+                  <p className="text-xs uppercase tracking-[0.2em] text-stone-500">
+                    Before you send
+                  </p>
+
+                  <ul className="mt-4 space-y-3 text-sm leading-7 text-stone-700">
+                    <li>• Include a title that matches the spirit of the piece.</li>
+                    <li>• Choose at least one story type.</li>
+                    <li>• Make sure the submission is at least 200 words.</li>
+                    <li>• Double-check your email so we can reply.</li>
+                  </ul>
+                </div>
+              </div>
+            </aside>
           </div>
-
-          <div>
-            <label className="mb-2 block text-sm font-medium">Email</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full bg-white px-4 py-3 text-sm text-stone-900 outline-none ring-1 ring-stone-200 focus:ring-stone-400"
-              required
-            />
-          </div>
-
-          <div>
-            <label className="mb-2 block text-sm font-medium">Story Title</label>
-            <input
-              type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              className="w-full bg-white px-4 py-3 text-sm text-stone-900 outline-none ring-1 ring-stone-200 focus:ring-stone-400"
-              required
-            />
-          </div>
-
-          <div>
-            <label className="mb-3 block text-sm font-medium">Story Type</label>
-            <div className="flex flex-wrap gap-3">
-              {storyTypes.map((tag) => {
-                const selected = storyType.includes(tag);
-
-                return (
-                  <button
-                    key={tag}
-                    type="button"
-                    onClick={() => toggleTag(tag)}
-                    className={`px-4 py-2 text-sm transition ${
-                      selected
-                        ? "bg-stone-900 text-amber-50"
-                        : "bg-amber-50 text-stone-900 ring-1 ring-stone-200 hover:bg-amber-100"
-                    }`}
-                  >
-                    {tag}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          <div>
-            <div className="mb-2 flex items-center justify-between">
-              <label className="block text-sm font-medium">Your Story</label>
-              <span className="text-xs text-stone-600">{wordCount} words</span>
-            </div>
-            <textarea
-              value={story}
-              onChange={(e) => setStory(e.target.value)}
-              rows={14}
-              className="w-full bg-white px-4 py-3 text-sm leading-7 text-stone-900 outline-none ring-1 ring-stone-200 focus:ring-stone-400"
-              placeholder="Write or paste your story here..."
-              required
-            />
-            <p className="mt-2 text-xs text-stone-600">
-              Minimum: 200 words
-            </p>
-          </div>
-
-          {error ? <p className="text-sm text-red-700">{error}</p> : null}
-          {success ? (
-            <div className="space-y-4">
-                <p className="text-sm text-green-700">{success}</p>
-
-                <Link
-                href="/"
-                className="inline-block bg-amber-50 px-5 py-3 text-sm font-medium text-stone-900 transition hover:bg-amber-100 ring-1 ring-stone-200"
-                >
-                ← Back to Home
-                </Link>
-            </div>
-            ) : null}
-
-          <div className="flex flex-wrap gap-4">
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="bg-stone-900 px-5 py-3 text-sm font-medium text-amber-50 transition hover:bg-amber-900 disabled:cursor-not-allowed disabled:opacity-60"
-            >
-              {isSubmitting ? "Sending..." : "Send Story"}
-            </button>
-          </div>
-        </form>
+        </div>
       </div>
     </main>
   );
