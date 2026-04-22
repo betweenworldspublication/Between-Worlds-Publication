@@ -1,12 +1,9 @@
 import { NextResponse } from "next/server";
 import { promises as dns } from "dns";
-import { Resend } from "resend";
 import { sanityWriteClient } from "../../../lib/sanityWrite";
 import { client } from "../../../lib/sanity";
 
 export const runtime = "nodejs";
-
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 function isValidEmailFormat(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -65,7 +62,6 @@ export async function POST(request: Request) {
       );
     }
 
-    // Check for duplicate in Sanity
     const existingSubscriber = await client.fetch(
       `*[_type == "subscriber" && email == $email][0]{
         _id,
@@ -81,22 +77,11 @@ export async function POST(request: Request) {
       );
     }
 
-    // Store new subscriber
     const created = await sanityWriteClient.create({
       _type: "subscriber",
       email,
       subscribedAt: new Date().toISOString(),
     });
-
-    // Optional: notify you by email
-    if (process.env.RESEND_API_KEY) {
-      await resend.emails.send({
-        from: "Between Worlds <onboarding@resend.dev>",
-        to: ["YOUR_EMAIL@example.com"],
-        subject: "New newsletter signup",
-        text: `New newsletter subscriber: ${email}\nSubscriber ID: ${created._id}`,
-      });
-    }
 
     return NextResponse.json({
       success: true,
@@ -105,7 +90,6 @@ export async function POST(request: Request) {
     });
   } catch (error: any) {
     console.error("Newsletter signup error:", error);
-
     return NextResponse.json(
       { error: error?.message || "Failed to process newsletter signup." },
       { status: 500 }
