@@ -17,17 +17,17 @@ export async function POST(request: Request) {
       );
     }
 
-    await sanityWriteClient.create({
+    const created = await sanityWriteClient.create({
       _type: "subscriber",
       email,
       subscribedAt: new Date().toISOString(),
     });
 
-    return NextResponse.json({ success: true });
-  } catch (error) {
+    return NextResponse.json({ success: true, id: created._id });
+  } catch (error: any) {
     console.error("Newsletter signup error:", error);
     return NextResponse.json(
-      { error: "Failed to save subscriber." },
+      { error: error?.message || "Failed to save subscriber." },
       { status: 500 }
     );
   }
