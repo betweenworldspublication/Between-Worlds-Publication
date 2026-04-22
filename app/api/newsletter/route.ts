@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { promises as dns } from "dns";
 import { sanityWriteClient } from "../../../lib/sanityWrite";
-import { client } from "../../../lib/sanity";
 
 export const runtime = "nodejs";
 
@@ -62,7 +61,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const existingSubscriber = await client.fetch(
+    const existingSubscriber = await sanityWriteClient.fetch(
       `*[_type == "subscriber" && email == $email][0]{
         _id,
         email
