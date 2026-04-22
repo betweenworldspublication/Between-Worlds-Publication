@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
-import { sanityWriteClient } from "../../../lib/sanityWrite";
+import { Resend } from "resend";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -17,17 +19,18 @@ export async function POST(request: Request) {
       );
     }
 
-    const created = await sanityWriteClient.create({
-      _type: "subscriber",
-      email,
-      subscribedAt: new Date().toISOString(),
+    await resend.emails.send({
+      from: "Between Worlds <onboarding@resend.dev>",
+      to: ["justinw071019@gmail.com"],
+      subject: "New newsletter signup",
+      text: `New newsletter subscriber: ${email}`,
     });
 
-    return NextResponse.json({ success: true, id: created._id });
+    return NextResponse.json({ success: true });
   } catch (error: any) {
     console.error("Newsletter signup error:", error);
     return NextResponse.json(
-      { error: error?.message || "Failed to save subscriber." },
+      { error: error?.message || "Failed to process signup." },
       { status: 500 }
     );
   }
